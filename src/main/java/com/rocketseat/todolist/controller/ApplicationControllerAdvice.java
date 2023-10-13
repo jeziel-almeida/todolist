@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.rocketseat.todolist.exception.InvalidAttributeException;
 import com.rocketseat.todolist.exception.InvalidTaskDateException;
 import com.rocketseat.todolist.exception.TaskNotFoundException;
 import com.rocketseat.todolist.exception.UserNotAllowedException;
@@ -36,12 +35,6 @@ public class ApplicationControllerAdvice {
     @ExceptionHandler(TaskNotFoundException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public String handleTaskNotFoundException(TaskNotFoundException ex) {
-        return ex.getMessage();
-    }
-
-    @ExceptionHandler(InvalidAttributeException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public String handleInvalidAttributeException(InvalidAttributeException ex) {
         return ex.getMessage();
     }
 
