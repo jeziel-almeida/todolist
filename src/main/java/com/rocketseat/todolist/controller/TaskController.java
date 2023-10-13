@@ -18,6 +18,7 @@ import com.rocketseat.todolist.model.Task;
 import com.rocketseat.todolist.service.TaskService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("api/tasks")
@@ -28,7 +29,7 @@ public class TaskController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Task create(@RequestBody Task task, HttpServletRequest request) {
+    public Task create(@RequestBody @Valid Task task, HttpServletRequest request) {
 
         return taskService.create(task, request);
     }

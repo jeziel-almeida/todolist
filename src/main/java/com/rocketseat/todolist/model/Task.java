@@ -9,6 +9,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
@@ -19,6 +20,7 @@ public class Task {
     @GeneratedValue(generator = "UUID")
     private UUID id;
 
+    @NotBlank
     @Column(length = 50)
     private String title;
 
@@ -34,5 +36,12 @@ public class Task {
     private LocalDateTime createdAt;
 
     private UUID idUser;
+
+    public void setTitle(String title) throws Exception {
+        if(title.length() > 50) {
+            throw new Exception("O campo title deve conter no máximo 50 caracteres.");
+        }
+        this.title = title;
+    }
 
 }
