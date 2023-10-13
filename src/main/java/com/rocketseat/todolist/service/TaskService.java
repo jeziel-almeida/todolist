@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.rocketseat.todolist.exception.InvalidTaskDateException;
 import com.rocketseat.todolist.exception.TaskNotFoundException;
+import com.rocketseat.todolist.exception.UserNotAllowedException;
 import com.rocketseat.todolist.model.Task;
 import com.rocketseat.todolist.repository.TaskRepository;
 import com.rocketseat.todolist.utils.Utils;
@@ -43,6 +44,10 @@ public class TaskService {
     public Task update(Task task, UUID id, HttpServletRequest request) {
 
         Task taskBD = this.taskRepository.findById(id).orElseThrow(() -> new TaskNotFoundException(id));
+
+        UUID idUser = this.getIdUserFromRequest(request);
+        
+        if (!taskBD.getIdUser().equals(idUser)) throw new UserNotAllowedException();
 
         Utils.copyNonNullProperties(task, taskBD);
 
