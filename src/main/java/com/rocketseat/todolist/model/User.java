@@ -5,6 +5,8 @@ import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.rocketseat.todolist.dto.UserDTO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,5 +31,9 @@ public class User {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    
+    public User(UserDTO userDTO) {
+        this.name = userDTO.name();
+        this.username = userDTO.username();
+        this.password = userDTO.password();
+    }
 }
